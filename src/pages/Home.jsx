@@ -7,7 +7,7 @@ export default function Home() {
     useEffect(() => {
         // Simulate a check to see if the user is a student.
         // In a real application, this would involve checking an authentication context or a token.
-        const userRole = 'student'; // Hardcoded for demonstration
+        const userRole = '' // Replace with actual logic to determine user role.
 
         if (userRole === 'student') {
             // Redirect to the posts page for students.
