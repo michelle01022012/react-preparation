@@ -1,25 +1,44 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import axios from 'axios';
 
-export default function Home() {
-    const navigate = useNavigate();
+const Home = () => {
+    const [users, setUsers] = useState([]);
+   
+    async function getUsers() {
+        const { data } = await axios.get("https://jsonplaceholder.typicode.com/users");
+        setUsers(data);
+    
+    }
 
     useEffect(() => {
-        // Simulate a check to see if the user is a student.
-        // In a real application, this would involve checking an authentication context or a token.
-        const userRole = '' // Replace with actual logic to determine user role.
-
-        if (userRole === 'student') {
-            // Redirect to the posts page for students.
-            // Using a sample post ID '123' for demonstration.
-            navigate('/123');
-        }
-    }, [navigate]);
-
+        getUsers();
+    }, []);
     return (
-        <div>
-            <h1>Home</h1>
-            <p>If you are not redirected, you are not a student.</p>
+     <div className="container">
+        <div className="row">
+            <div className="user-list">
+              {users.map((user) => (
+                 <div className="user">
+                    <div className="user-card">
+                        <div className="user-card__container">
+                            <h3>{user.name}                                                                                                                 </h3>
+                            <p>
+                                <b>Email:</b> {user.email}
+                            </p>
+                            <p>
+                                <b>Phone:</b> {user.phone}
+                            </p>
+                            <p>
+                                <b>Website:</b> {user.website}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+             </div>
+          </div>
         </div>
-    );
-}
+      );
+      };
+
+        export default Home;
+                   
